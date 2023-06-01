@@ -27,7 +27,12 @@ pip install -r requirements.txt
 ```
 
 ## Data Preprocessing
-S`./output/pre-retrieval/`. 
+The following commands are used to conduct data preprocessing, which also includes the automatic annotation of initiative-taking decision labels. 
+We derive the initiative annotations by mapping the manual annotations of actions to initiative or non-initiative labels
+The raw data for the WISE, MSDialog and ClariQ is stored in the paths `./data/WISE/`, `./data/MSDialog/` and `./data/ClariQ/`.
+Note that the preprocessed data is still stored in these paths.
+
+Run the following commands to preprocess WISE:
 ```bash
 python -u ./dataset/preprocess_WISE.py \
 --input_path ./dataset/WISE/conversation_train_line.json \
@@ -41,7 +46,7 @@ python -u ./dataset/preprocess_WISE.py \
 --input_path ./dataset/WISE/conversation_test_line.json \
 --output_path ./dataset/WISE/test_WISE.pkl
 ```
-
+Run the following commands to preprocess MSDialog:
 ```bash
 python -u ./dataset/preprocess_MSDialog.py \
 --input_path ./dataset/MSDialog/train.tsv \
@@ -55,7 +60,7 @@ python -u ./dataset/preprocess_MSDialog.py \
 --input_path ./dataset/MSDialog/test.tsv \
 --output_path ./dataset/MSDialog/test_MSDialog.pkl
 ```
-
+Run the following commands to preprocess ClariQ:
 ```bash
 python -u ./dataset/preprocess_ClariQ.py \
 --input_path ./dataset/ClariQ/train.tsv \
@@ -73,27 +78,41 @@ python -u ./dataset/preprocess_ClariQ.py \
 ## SIP
 
 ### LLaMA
+```bash
+```
 
 ### MuSIc
-
+```bash
+```
 
 ## Clarification need prediction
-
+```bash
+```
 
 ## Action prediction
 ### Multi-label classification
-
+```bash
+```
 
 ### Sequence generation
+```bash
+```
 
-### SIP+Multi-label classification
+### SIP+multi-label classification
+```bash
+```
 
-
-### SIP+Sequence generation
+### SIP+sequence generation
+```bash
+```
 
 
 ## Evaluation
 
 ### Evaluate SIP
+```bash
+```
 
 ### Evaluate action prediction
+```bash
+```
