@@ -11,10 +11,14 @@ In order to replicate the results in the paper, kindly adhere to the subsequent 
 - [Action prediction](#Action-prediction) 
   - [Multi-label classification](#Multi-label-classification) 
   - [Sequence generation](#Sequence-generation)
+  - [Multi-label classification](#Multi-label-classification) 
+  - [Sequence generation](#Sequence-generation)
 - [Evaluation](#Evaluation) 
   - [Evaluate SIP](#Evaluate-SIP) 
-  - [Evaluate Action prediction](#Evaluate-Action-prediction)
+  - [Evaluate action prediction](#Evaluate-Action-prediction)
 
+Note that due to the nature of the anonymous repository, we apologize that the outline hyperlinks do not work. 
+However, these issues will be fixed in the final repository.
 
 ## Prerequisites
 Install dependencies:  
@@ -52,7 +56,6 @@ python -u ./dataset/preprocess_MSDialog.py \
 --output_path ./dataset/MSDialog/test_MSDialog.pkl
 ```
 
-
 ```bash
 python -u ./dataset/preprocess_ClariQ.py \
 --input_path ./dataset/ClariQ/train.tsv \
@@ -66,3 +69,26 @@ python -u ./dataset/preprocess_ClariQ.py \
 --input_path ./dataset/ClariQ/test_with_labels.tsv \
 --output_path ./dataset/ClariQ/test_ClariQ.pkl
 ```
+
+## SIP
+
+### LLaMA
+
+### MuSIc
+
+
+## Clarification need prediction
+
+
+## Action prediction
+### Multi-label classification
+
+
+### Sequence generation
+
+
+## Evaluation
+
+### Evaluate SIP
+
+### Evaluate action prediction
