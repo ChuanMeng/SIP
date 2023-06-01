@@ -27,10 +27,10 @@ pip install -r requirements.txt
 ```
 
 ## Data Preprocessing
-The following commands are used to conduct data preprocessing, which also includes the automatic annotation of initiative-taking decision labels. 
-We derive the initiative annotations by mapping the manual annotations of actions to initiative or non-initiative labels
+The following commands are used to conduct data preprocessing, which includes the automatic annotation of initiative-taking decision labels. 
+We derive the initiative annotations by mapping the manual annotations of actions to initiative or non-initiative labels.
 The raw data for the WISE, MSDialog and ClariQ is stored in the paths `./data/WISE/`, `./data/MSDialog/` and `./data/ClariQ/`.
-Note that the preprocessed data is still stored in these paths.
+The preprocessed data is still stored in these paths.
 
 Run the following commands to preprocess WISE:
 ```bash
