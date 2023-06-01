@@ -11,8 +11,8 @@ In order to replicate the results in the paper, kindly adhere to the subsequent 
 - [Action prediction](#Action-prediction) 
   - [Multi-label classification](#Multi-label-classification) 
   - [Sequence generation](#Sequence-generation)
-  - [Multi-label classification](#Multi-label-classification) 
-  - [Sequence generation](#Sequence-generation)
+  - [SIP+Multi-label classification](#Multi-label-classification) 
+  - [SIP+Sequence generation](#Sequence-generation)
 - [Evaluation](#Evaluation) 
   - [Evaluate SIP](#Evaluate-SIP) 
   - [Evaluate action prediction](#Evaluate-Action-prediction)
@@ -85,6 +85,11 @@ python -u ./dataset/preprocess_ClariQ.py \
 
 
 ### Sequence generation
+
+### SIP+Multi-label classification
+
+
+### SIP+Sequence generation
 
 
 ## Evaluation
