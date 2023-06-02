@@ -75,7 +75,8 @@ python -u ./dataset/preprocess_ClariQ.py \
 ## Run SIP
 ### LLaMA
 We provide the script for running LLaMA; see [here](./model/LLaMA.py).
-Before running the script, please first download the LLaMA original checkpoints and convert them to the Hugging Face Transformers format; see [here](https://huggingface.co/docs/transformers/main/model_doc/llama) for details.
+Before running the script, please make sure your Cuda version is greater than or equal to 11.1. 
+Next, download the LLaMA original checkpoints and convert them to the Hugging Face Transformers format; see [here](https://huggingface.co/docs/transformers/main/model_doc/llama) for details.
 Because the original LLaMA performs extremely badly on Chinese text, we use the Chinese versions of LLaMA from [here](https://github.com/ymcui/Chinese-LLaMA-Alpaca/blob/main/README_EN.md). 
 Please follow the link to produce Chinese LLaMA checkpoints.
 Note that only LLaMA-7B and 13B are available for Chinese LLaMA at the time of writing.
