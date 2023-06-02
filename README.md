@@ -528,7 +528,7 @@ python -u ./model/Run.py \
 --input_path ./dataset/MSDialog/valid_MSDialog.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---mode valid
+--mode inference
 
 python -u ./model/Run.py \
 --task AP \

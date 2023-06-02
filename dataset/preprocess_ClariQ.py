@@ -4,7 +4,6 @@ import codecs
 from sys import *
 import random
 import pprint
-import pandas as pd
 from tqdm import tqdm
 import json
 import argparse
