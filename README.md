@@ -604,8 +604,8 @@ python -u ./model/Run.py \
 ```
 The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/MSDialog.SIP-AP.sg/checkpoints/` and `./output/MSDialog.SIP-AP.sg/`, respectively.
 
-
 ## Evaluate action prediction
+Evaluate the action prediction model based on multi-label classification on the validation and test sets of WISE:
 ```bash
 python -u Evaluation.py \
 --prediction_path ./output/WISE.AP.mlc \
@@ -614,7 +614,11 @@ python -u Evaluation.py \
 python -u Evaluation.py \
 --prediction_path ./output/WISE.AP.mlc \
 --label_path ./dataset/WISE/test_WISE.pkl
+```
+The files recording the evaluation results would be saved in the path `./output/WISE.AP.mlc/`.
 
+Evaluate the action prediction model based on multi-label classification on the validation and test sets of MSDialog:
+```bash
 python -u Evaluation.py \
 --prediction_path ./output/MSDialog.AP.mlc \
 --label_path ./dataset/MSDialog/valid_MSDialog.pkl
@@ -622,8 +626,11 @@ python -u Evaluation.py \
 python -u Evaluation.py \
 --prediction_path ./output/MSDialog.AP.mlc \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
+```
+The files recording the evaluation results would be saved in the path `./output/MSDialog.AP.mlc/`.
 
-
+Evaluate the SIP-aware action prediction model based on multi-label classification on the validation and test sets of WISE:
+```bash
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP-AP.mlc \
 --label_path ./dataset/WISE/valid_WISE.pkl
@@ -631,7 +638,11 @@ python -u Evaluation.py \
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP-AP.mlc \
 --label_path ./dataset/WISE/test_WISE.pkl
+```
+The files recording the evaluation results would be saved in the path `./output/WISE.SIP-AP.mlc/`.
 
+Evaluate the SIP-aware action prediction model based on multi-label classification on the validation and test sets of MSDialog:
+```bash
 python -u Evaluation.py \
 --prediction_path ./output/MSDialog.SIP-AP.mlc \
 --label_path ./dataset/MSDialog/valid_MSDialog.pkl
@@ -639,7 +650,11 @@ python -u Evaluation.py \
 python -u Evaluation.py \
 --prediction_path ./output/MSDialog.SIP-AP.mlc \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
+```
+The files recording the evaluation results would be saved in the path `./output/MSDialog.SIP-AP.mlc/`.
 
+Evaluate the action prediction model based on sequence generation on the validation and test sets of WISE:
+```bash
 python -u Evaluation.py \
 --prediction_path ./output/WISE.AP.sg \
 --label_path ./dataset/WISE/valid_WISE.pkl
@@ -647,7 +662,11 @@ python -u Evaluation.py \
 python -u Evaluation.py \
 --prediction_path ./output/WISE.AP.sg \
 --label_path ./dataset/WISE/test_WISE.pkl
+```
+The files recording the evaluation results would be saved in the path `./output/WISE.AP.sg/`.
 
+Evaluate the action prediction model based on sequence generation on the validation and test sets of MSDialog:
+```bash
 python -u Evaluation.py \
 --prediction_path ./output/MSDialog.AP.sg \
 --label_path ./dataset/MSDialog/valid_MSDialog.pkl
@@ -655,7 +674,11 @@ python -u Evaluation.py \
 python -u Evaluation.py \
 --prediction_path ./output/MSDialog.AP.sg \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
+```
+The files recording the evaluation results would be saved in the path `./output/MSDialog.AP.sg/`.
 
+Evaluate the SIP-aware action prediction model based on sequence generation on the validation and test sets of WISE:
+```bash
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP-AP.sg \
 --label_path ./dataset/WISE/valid_WISE.pkl
@@ -663,7 +686,11 @@ python -u Evaluation.py \
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP-AP.sg \
 --label_path ./dataset/WISE/test_WISE.pkl
+```
+The files recording the evaluation results would be saved in the path `./output/WISE.SIP-AP.sg/`.
 
+Evaluate the SIP-aware action prediction model based on sequence generation on the validation and test sets of MSDialog:
+```bash
 python -u Evaluation.py \
 --prediction_path ./output/MSDialog.SIP-AP.sg \
 --label_path ./dataset/MSDialog/valid_MSDialog.pkl
@@ -672,3 +699,4 @@ python -u Evaluation.py \
 --prediction_path ./output/MSDialog.SIP-AP.sg \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
 ```
+The files recording the evaluation results would be saved in the path `./output/MSDialog.SIP-AP.sg/`.
