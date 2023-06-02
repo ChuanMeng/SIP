@@ -238,7 +238,7 @@ python -u ./model/Run.py \
 ```
 The above commands would produce model checkpoints and inference output files, which are saved in the paths `./output/ClariQ.SIP.DistanceCRF/checkpoints/` and `./output/ClariQ.SIP.DistanceCRF/`, respectively.
 
-Run the following command to fine-tune MuSIc (pre-trained on SIP on the training set of MSDialog) on the training set of ClariQ and conduct inference on the validation and test sets of ClariQ::
+Run the following command to fine-tune MuSIc (pre-trained on SIP on the training set of MSDialog) on the training set of ClariQ and conduct inference on the validation and test sets of ClariQ:
 ```bash
 python -u ./model/Run.py \
 --task SIP \
@@ -269,7 +269,6 @@ python -u ./model/Run.py \
 ```
 Please specify `--initialization_path`, which shows your local path to the checkpoint trained on SIP on MSDialog.
 The above commands would produce checkpoints, which would be saved in the paths `./output/ClariQ.SIP.DistanceCRF-TransferLearning/checkpoints/`; the inference output files would be saved in the path `./output/ClariQ.SIP.DistanceCRF-TransferLearning/`.
-
 
 ## Evaluate SIP and clarification need prediction
 Evaluate LLaMA on the test set of WISE:
@@ -328,7 +327,7 @@ python -u Evaluation.py \
 ```
 The files recording the evaluation results would be saved in the path `./output/MSDialog.SIP.DistanceCRF/`.
 
-Evaluate MuSIc without pre-training on SIP on the validation and test sets of ClariQ:
+Evaluate MuSIc (without pre-training on SIP) on the validation and test sets of ClariQ:
 ```bash
 python -u Evaluation.py \
 --prediction_path ./output/ClariQ.SIP.DistanceCRF \
@@ -340,7 +339,7 @@ python -u Evaluation.py \
 ```
 The files recording the evaluation results would be saved in the path `./output/ClariQ.SIP.DistanceCRF/`.
 
-Evaluate MuSIc with pre-training on SIP on the validation and test sets of ClariQ:
+Evaluate MuSIc (with pre-training on SIP) on the validation and test sets of ClariQ:
 ```bash
 python -u Evaluation.py \
 --prediction_path ./output/ClariQ.SIP.DistanceCRF-TransferLearning \
@@ -433,7 +432,7 @@ python -u ./model/Run.py \
 --input_path ./dataset/WISE/valid_WISE.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path {Your local path to MuSIc's inference output file on SIP} \
+--SIP_path {Your local path to MuSIc's best inference output file on SIP} \
 --mode inference
 
 python -u ./model/Run.py \
@@ -442,11 +441,11 @@ python -u ./model/Run.py \
 --input_path ./dataset/WISE/test_WISE.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path {Your local path to MuSIc's inference output file on SIP} \
+--SIP_path {Your local path to MuSIc's best inference output file on SIP} \
 --mode inference
 ```
-Note that before conducting inference, please specify `--SIP_path`, which shows the path to the SIP inference output file.
-E.g., for conducting inference on the test set of WISE, please specify MuSIc's inference output file on the test set of WISE on the SIP task.
+Note that before conducting inference, please specify `--SIP_path`, which shows the path to MuSIc's best inference output file on SIP.
+E.g., for conducting inference on the test set of WISE, please specify MuSIc's best inference output file on the test set of WISE on the SIP task.
 The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/WISE.SIP-AP.mlc/checkpoints/` and `./output/WISE.SIP-AP.mlc/`, respectively.
 
 #### MSDialog
@@ -466,7 +465,7 @@ python -u ./model/Run.py \
 --input_path ./dataset/MSDialog/valid_MSDialog.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path {Your local path to MuSIc's inference output file on SIP} \
+--SIP_path {Your local path to MuSIc's best inference output file on SIP} \
 --mode inference
 
 python -u ./model/Run.py \
@@ -475,11 +474,11 @@ python -u ./model/Run.py \
 --input_path ./dataset/MSDialog/test_MSDialog.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path {Your local path to MuSIc's inference output file on SIP} \
+--SIP_path {Your local path to MuSIc's best inference output file on SIP} \
 --mode inference
 ```
-Note that before conducting inference, please specify `--SIP_path`, which shows the path to the SIP inference output file.
-E.g., for conducting inference on the test set of MSDialog, please specify MuSIc's inference output file on the test set of MSDialog on the SIP task.
+Note that before conducting inference, please specify `--SIP_path`, which shows the path to MuSIc's best inference output file on SIP.
+E.g., for conducting inference on the test set of MSDialog, please specify MuSIc's best inference output file on the test set of MSDialog on the SIP task.
 The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/MSDialog.SIP-AP.mlc/checkpoints/` and `./output/MSDialog.SIP-AP.mlc/`, respectively.
 
 ### Sequence generation
