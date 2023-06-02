@@ -1,10 +1,10 @@
 # System Initiative Prediction (SIP)
 
 This is the virtual appendix for the paper **System Initiative Prediction for Multi-turn Conversational Information Seeking**.
-In order to replicate the results in the paper, kindly adhere to the subsequent steps:
+To reproduce the reported results, please follow the instructions outlined below:
 - [Prerequisites](#Prerequisites)
 - [Data Preprocessing](#Data-Preprocessing)
-- [Run SIP](#SIP)
+- [Run SIP](#Run-SIP)
   - [LLaMA](#LLaMA) 
   - [MuSIc](#MuSIc) 
 - [Run clarification need prediction](#Run-clarification-need-prediction) 
@@ -28,7 +28,7 @@ pip install -r requirements.txt
 The following commands are used to conduct data preprocessing, which includes the automatic annotation of initiative-taking decision labels. 
 We derive the initiative annotations by mapping the manual annotations of actions to initiative or non-initiative labels.
 The raw data for the WISE, MSDialog and ClariQ is stored in the paths `./data/WISE/`, `./data/MSDialog/` and `./data/ClariQ/`.
-The preprocessed data is still stored in these paths.
+The preprocessed data would be still stored in these paths.
 
 Run the following commands to preprocess WISE:
 ```bash
@@ -75,8 +75,8 @@ python -u ./dataset/preprocess_ClariQ.py \
 ## Run SIP
 ### LLaMA
 We provide the script for running LLaMA; see [here](./model/LLaMA.py).
-Before running the script, please first download the LLaMA original checkpoints and convert them to the Hugging Face Transformers format; see [here](https://huggingface.co/docs/transformers/main/model_doc/llama).
-Because LLaMA performs extremely badly on Chinese text, we use the Chinese versions of LLaMA from [here](https://github.com/ymcui/Chinese-LLaMA-Alpaca/blob/main/README_EN.md). 
+Before running the script, please first download the LLaMA original checkpoints and convert them to the Hugging Face Transformers format; see [here](https://huggingface.co/docs/transformers/main/model_doc/llama) for details.
+Because the original LLaMA performs extremely badly on Chinese text, we use the Chinese versions of LLaMA from [here](https://github.com/ymcui/Chinese-LLaMA-Alpaca/blob/main/README_EN.md). 
 Please follow the link to produce Chinese LLaMA checkpoints.
 Note that only LLaMA-7B and 13B are available for Chinese LLaMA at the time of writing.
 
@@ -103,7 +103,7 @@ python -u ./model/LLaMA.py \
 --batch_size 2 \
 --demonstration_num 2
 ```
-The output files would be saved in the paths `.\output\WISE.SIP.LLaMA-zh-7B-plus` and `.\output\WISE.SIP.LLaMA-zh-13B-plus`.
+The inference output files would be saved in the paths `.\output\WISE.SIP.LLaMA-zh-7B-plus` and `.\output\WISE.SIP.LLaMA-zh-13B-plus`.
 
 #### MSDialog
 Run the following commands to run LLaMA on MSDialog:
@@ -148,7 +148,7 @@ python -u ./model/LLaMA.py \
 --batch_size 1 \
 --demonstration_num 2
 ```
-The output files would be saved in the paths `.\output\MSDialog.SIP.LLaMA-7B`, `MSDialog.SIP.LLaMA-13B`, `MSDialog.SIP.LLaMA-30B` and `MSDialog.SIP.LLaMA-65B`.
+The inference output files would be saved in the paths `.\output\MSDialog.SIP.LLaMA-7B`, `MSDialog.SIP.LLaMA-13B`, `MSDialog.SIP.LLaMA-30B` and `MSDialog.SIP.LLaMA-65B`.
 
 ### MuSIc
 #### WISE
@@ -210,7 +210,7 @@ python -u ./model/Run.py \
 The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/MSDialog.SIP.DistanceCRF/checkpoints/` and `./output/MSDialog.SIP.DistanceCRF/`, respectively.
 
 ## Run clarification need prediction
-Run the following command to train MuSIc on the training set of ClariQ and conduct inference on the validation and test sets of ClariQ:
+Run the following command to directly train MuSIc on the training set of ClariQ and conduct inference on the validation and test sets of ClariQ:
 ```bash
 python -u ./model/Run.py \
 --task SIP \
@@ -238,7 +238,7 @@ python -u ./model/Run.py \
 ```
 The above commands would produce model checkpoints and inference output files, which are saved in the paths `./output/ClariQ.SIP.DistanceCRF/checkpoints/` and `./output/ClariQ.SIP.DistanceCRF/`, respectively.
 
-Run the following command to infer MuSIc without pertaining on MSDialog on the validation and test sets of ClariQ:
+Run the following command to fine-tune MuSIc (pre-trained on SIP on the training set of MSDialog) on the training set of ClariQ and conduct inference on the validation and test sets of ClariQ::
 ```bash
 python -u ./model/Run.py \
 --task SIP \
