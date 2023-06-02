@@ -4,12 +4,12 @@ This is the virtual appendix for the paper **System Initiative Prediction for Mu
 In order to replicate the results in the paper, kindly adhere to the subsequent steps:
 - [Prerequisites](#Prerequisites)
 - [Data Preprocessing](#Data-Preprocessing)
-- [SIP](#SIP)
+- [Run SIP](#SIP)
   - [LLaMA](#LLaMA) 
   - [MuSIc](#MuSIc) 
-- [Clarification need prediction](#Clarification-need-prediction) 
+- [Run clarification need prediction](#Run-clarification-need-prediction) 
 - [Evaluate SIP and Clarification need prediction](#Evaluate-SIP-and-clarification-need-prediction) 
-- [Action prediction](#Action-prediction) 
+- [Run action prediction](#Run-action-prediction) 
   - [Multi-label classification](#Multi-label-classification) 
   - [SIP+Multi-label classification](#Multi-label-classification) 
   - [Sequence generation](#Sequence-generation)
@@ -74,10 +74,74 @@ python -u ./dataset/preprocess_ClariQ.py \
 --output_path ./dataset/ClariQ/test_ClariQ.pkl
 ```
 
-## SIP
+## Run SIP
 
 ### LLaMA
+
+#### WISE
 ```bash
+python -u ./model/LLaMA.py \
+--model LLaMA-zh-7B-plus \
+--pretained /ivi/ilps/personal/cmeng/llama-zh/7B-plus \
+--demonstration_path ./dataset/WISE/train_WISE.pkl \
+--input_path ./dataset/WISE/test_WISE.pkl \
+--output_path ./output/ \
+--max_new_tokens 5 \
+--batch_size 2 \
+--demonstration_num 2
+
+python -u ./model/LLaMA.py \
+--model LLaMA-zh-13B-plus \
+--pretained /ivi/ilps/personal/cmeng/llama-zh/13B-plus \
+--demonstration_path ./dataset/WISE/train_WISE.pkl \
+--input_path ./dataset/WISE/test_WISE.pkl \
+--output_path ./output/ \
+--max_new_tokens 5 \
+--batch_size 2 \
+--demonstration_num 2
+```
+
+#### MSDialog
+```bash
+python -u ./model/LLaMA.py \
+--model LLaMA-7B \
+--pretained /ivi/ilps/personal/cmeng/llama/7B \
+--demonstration_path ./dataset/MSDialog/train_MSDialog.pkl \
+--input_path ./dataset/MSDialog/test_MSDialog.pkl \
+--output_path ./output/ \
+--max_new_tokens 10 \
+--batch_size 4 \
+--demonstration_num 2
+
+python -u ./model/LLaMA.py \
+--model LLaMA-13B \
+--pretained /ivi/ilps/personal/cmeng/llama/13B \
+--demonstration_path ./dataset/MSDialog/train_MSDialog.pkl \
+--input_path ./dataset/MSDialog/test_MSDialog.pkl \
+--output_path ./output/ \
+--max_new_tokens 10 \
+--batch_size 2 \
+--demonstration_num 2
+
+python -u ./model/LLaMA.py \
+--model LLaMA-30B \
+--pretained /ivi/ilps/personal/cmeng/llama/30B \
+--demonstration_path ./dataset/MSDialog/train_MSDialog.pkl \
+--input_path ./dataset/MSDialog/test_MSDialog.pkl \
+--output_path ./output/ \
+--max_new_tokens 10 \
+--batch_size 1 \
+--demonstration_num 2
+
+python -u ./model/LLaMA.py \
+--model LLaMA-65B \
+--pretained /ivi/ilps/personal/cmeng/llama/65B \
+--demonstration_path ./dataset/MSDialog/train_MSDialog.pkl \
+--input_path ./dataset/MSDialog/test_MSDialog.pkl \
+--output_path ./output/ \
+--max_new_tokens  10 \
+--batch_size 1 \
+--demonstration_num 2
 ```
 
 ### MuSIc
@@ -136,9 +200,8 @@ python -u ./model/Run.py \
 --mode inference
 ```
 
-## Clarification need prediction
+## Run clarification need prediction
 ```bash
-srun -p gpu --gres=gpu:a6000:1 --time=99:00:00 -c8 --mem=50G \
 python -u ./model/Run.py \
 --task SIP \
 --model DistanceCRF \
@@ -166,6 +229,7 @@ python -u ./model/Run.py \
 --log_path ./log/ \
 --mode inference
 ```
+
 ## Evaluate SIP and Clarification need prediction
 ```bash
 python -u Evaluation.py \
@@ -187,7 +251,7 @@ python -u Evaluation.py \
 --label_path ./dataset/ClariQ/test_ClariQ.pkl
 ```
 
-## Action prediction
+## Run action prediction
 
 ### Multi-label classification
 
