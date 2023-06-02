@@ -1,7 +1,7 @@
 # System Initiative Prediction (SIP)
 
 This is the virtual appendix for the paper **System Initiative Prediction for Multi-turn Conversational Information Seeking**.
-To reproduce the reported results, please follow the instructions outlined below:
+To reproduce the reported results in the paper, please follow the instructions outlined below:
 - [Prerequisites](#Prerequisites)
 - [Data Preprocessing](#Data-Preprocessing)
 - [Run SIP](#Run-SIP)
