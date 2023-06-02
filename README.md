@@ -73,7 +73,6 @@ python -u ./dataset/preprocess_ClariQ.py \
 --input_path ./dataset/ClariQ/test_with_labels.tsv \
 --output_path ./dataset/ClariQ/test_ClariQ.pkl
 ```
-
 ## Run SIP
 
 ### LLaMA
@@ -145,7 +144,6 @@ python -u ./model/LLaMA.py \
 ```
 
 ### MuSIc
-
 #### WISE
 ```bash
 python -u ./model/Run.py \
@@ -370,7 +368,6 @@ python -u ./model/Run.py \
 ```
 
 ### Sequence generation
-
 #### WISE
 ```bash
 python -u ./model/Run.py \
@@ -486,7 +483,6 @@ python -u ./model/Run.py \
 
 ## Evaluate action prediction
 ```bash
-
 python -u Evaluation.py \
 --prediction_path ./output/WISE.AP.mlc \
 --label_path ./dataset/WISE/test_WISE.pkl
@@ -495,7 +491,6 @@ python -u Evaluation.py \
 --prediction_path ./output/MSDialog.AP.mlc \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
 
-
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP-AP.mlc \
 --label_path ./dataset/WISE/test_WISE.pkl
@@ -503,7 +498,6 @@ python -u Evaluation.py \
 python -u Evaluation.py \
 --prediction_path ./output/MSDialog.SIP-AP.mlc \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
-
 
 python -u Evaluation.py \
 --prediction_path ./output/WISE.AP.sg \
@@ -517,9 +511,7 @@ python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP-AP.sg \
 --label_path ./dataset/WISE/test_WISE.pkl
 
-
 python -u Evaluation.py \
 --prediction_path ./output/MSDialog.SIP-AP.sg \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
-
 ```
