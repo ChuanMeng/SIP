@@ -178,7 +178,7 @@ python -u ./model/Run.py \
 --log_path ./log/ \
 --mode inference
 ```
-The above commands would produce model checkpoints and inference output files, which are stored in the path `./output/WISE.SIP.DistanceCRF/checkpoints` and `./output/WISE.SIP.DistanceCRF/`, respectively.
+The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/WISE.SIP.DistanceCRF/checkpoints/` and `./output/WISE.SIP.DistanceCRF/`, respectively.
 
 #### MSDialog
 Train MuSIc on the training set of MSDialog and conduct inference on the validation and test sets of MSDialog:
@@ -207,10 +207,10 @@ python -u ./model/Run.py \
 --log_path ./log/ \
 --mode inference
 ```
-The above commands would produce model checkpoints and inference output files, which are stored in the path `./output/MSDialog.SIP.DistanceCRF/checkpoints` and `./output/MSDialog.SIP.DistanceCRF/`, respectively.
+The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/MSDialog.SIP.DistanceCRF/checkpoints/` and `./output/MSDialog.SIP.DistanceCRF/`, respectively.
 
 ## Run clarification need prediction
-Run the following command to train MuSIc on the training set of ClariQ:
+Run the following command to train MuSIc on the training set of ClariQ and conduct inference on the validation and test sets of ClariQ:
 ```bash
 python -u ./model/Run.py \
 --task SIP \
@@ -219,14 +219,7 @@ python -u ./model/Run.py \
 --output_path ./output/ \
 --log_path ./log/ \
 --mode train \
-# --initialization_path {your local path to the checkpoint trained on SIP on MSDialog}
-```
-The above commands would produce model checkpoints in the path `./output/ClariQ.SIP.DistanceCRF/checkpoints/`.
-If you would like to fine-tune the checkpoint that is pre-trained on the SIP task on ClariQ, please specify `--initialization_path`. 
-In this case, the checkpoints would be saved in the path `./output/ClariQ.SIP.DistanceCRF-TransferLearning/checkpoints/`.
 
-Run the following command to infer MuSIc without pertaining on MSDialog on the validation and test sets of ClariQ:
-```bash
 python -u ./model/Run.py \
 --task SIP \
 --model DistanceCRF \
@@ -234,7 +227,6 @@ python -u ./model/Run.py \
 --output_path ./output/ \
 --log_path ./log/ \
 --mode inference \
-# --initialization_path {your local path to the checkpoint trained on SIP on MSDialog}
 
 python -u ./model/Run.py \
 --task SIP \
@@ -243,13 +235,45 @@ python -u ./model/Run.py \
 --output_path ./output/ \
 --log_path ./log/ \
 --mode inference \
-# --initialization_path {your local path to the checkpoint trained on SIP on MSDialog}
 ```
-The above commands would produce inference output files in the path `./output/ClariQ.SIP.DistanceCRF/`.
-If you would like to infer MuSIc with pertaining on MSDialog on the validation and test sets of ClariQ, please still specify `--initialization_path` that is used during training.
+The above commands would produce model checkpoints and inference output files, which are saved in the paths `./output/ClariQ.SIP.DistanceCRF/checkpoints/` and `./output/ClariQ.SIP.DistanceCRF/`, respectively.
+
+Run the following command to infer MuSIc without pertaining on MSDialog on the validation and test sets of ClariQ:
+```bash
+python -u ./model/Run.py \
+--task SIP \
+--model DistanceCRF \
+--input_path ./dataset/ClariQ/train_ClariQ.pkl \
+--output_path ./output/ \
+--log_path ./log/ \
+--initialization_path {your local path to the checkpoint trained on SIP on MSDialog} \
+--mode train \
+
+python -u ./model/Run.py \
+--task SIP \
+--model DistanceCRF \
+--input_path ./dataset/ClariQ/valid_ClariQ.pkl \
+--output_path ./output/ \
+--log_path ./log/ \
+--initialization_path {your local path to the checkpoint trained on SIP on MSDialog} \
+--mode inference \
+
+python -u ./model/Run.py \
+--task SIP \
+--model DistanceCRF \
+--input_path ./dataset/ClariQ/test_ClariQ.pkl \
+--output_path ./output/ \
+--log_path ./log/ \
+--initialization_path {your local path to the checkpoint trained on SIP on MSDialog} \
+--mode inference \
+```
+Please specify `--initialization_path`, which shows your local path to the checkpoint trained on SIP on MSDialog.
+The above commands would produce checkpoints, which would be saved in the paths `./output/ClariQ.SIP.DistanceCRF-TransferLearning/checkpoints/`; the inference output files would be saved in the path `./output/ClariQ.SIP.DistanceCRF-TransferLearning/`.
 
 
 ## Evaluate SIP and clarification need prediction
+
+Evaluate LLaMA on the test set of WISE:
 ```bash
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP.LLaMA-zh-7B-plus \
@@ -259,44 +283,75 @@ python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP.LLaMA-zh-13B-plus \
 --label_path ./dataset/WISE/test_WISE.pkl
 ```
+The files recording the evaluation results would be saved in the paths `./output/WISE.SIP.LLaMA-zh-7B-plus/` and `./output/WISE.SIP.LLaMA-zh-13B-plus/`.
 
+Evaluate LLaMA on the test set of MSDialog:
 ```bash
 python -u Evaluation.py \
---prediction_path ./output/MSDialog.SIP.yesno-LLaMA-7B \
+--prediction_path ./output/MSDialog.SIP.LLaMA-7B \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
 
 python -u Evaluation.py \
---prediction_path ./output/MSDialog.SIP.yesno-LLaMA-13B \
+--prediction_path ./output/MSDialog.SIP.LLaMA-13B \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
 
 python -u Evaluation.py \
---prediction_path ./output/MSDialog.SIP.yesno-LLaMA-30B \
+--prediction_path ./output/MSDialog.SIP.LLaMA-30B \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
 
 python -u Evaluation.py \
---prediction_path ./output/MSDialog.SIP.yesno-LLaMA-65B \
+--prediction_path ./output/MSDialog.SIP.LLaMA-65B \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
 ```
+The files recording the evaluation results would be saved in the paths `./output/WISE.SIP.LLaMA-zh-7B-plus/`, `./output/WISE.SIP.LLaMA-zh-13B-plus/`, `./output/WISE.SIP.LLaMA-zh-30B-plus/` and `./output/WISE.SIP.LLaMA-zh-65B-plus/`.
 
+Evaluate MuSIc on the validation and test sets of WISE:
 ```bash
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP.DistanceCRF \
 --label_path ./dataset/WISE/test_WISE.pkl
 
 python -u Evaluation.py \
+--prediction_path ./output/WISE.SIP.DistanceCRF \
+--label_path ./dataset/WISE/valid_WISE.pkl
+```
+The files recording the evaluation results would be saved in the path `./output/WISE.SIP.DistanceCRF/`.
+
+Evaluate MuSIc on the validation and test sets of MSDialog:
+```bash
+python -u Evaluation.py \
+--prediction_path ./output/MSDialog.SIP.DistanceCRF \
+--label_path ./dataset/MSDialog/valid_MSDialog.pkl
+
+python -u Evaluation.py \
 --prediction_path ./output/MSDialog.SIP.DistanceCRF \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
 ```
+The files recording the evaluation results would be saved in the path `./output/MSDialog.SIP.DistanceCRF/`.
 
+Evaluate MuSIc without pre-training on SIP on the validation and test sets of ClariQ:
 ```bash
 python -u Evaluation.py \
 --prediction_path ./output/ClariQ.SIP.DistanceCRF \
---label_path ./dataset/ClariQ/test_ClariQ.pkl
+--label_path ./dataset/ClariQ/valid_ClariQ.pkl
 
 python -u Evaluation.py \
---prediction_path ./output/ClariQ.SIP.DistanceCRF-TL \
+--prediction_path ./output/ClariQ.SIP.DistanceCRF \
 --label_path ./dataset/ClariQ/test_ClariQ.pkl
 ```
+The files recording the evaluation results would be saved in the path `./output/ClariQ.SIP.DistanceCRF/`.
+
+Evaluate MuSIc with pre-training on SIP on the validation and test sets of ClariQ:
+```bash
+python -u Evaluation.py \
+--prediction_path ./output/ClariQ.SIP.DistanceCRF-TransferLearning \
+--label_path ./dataset/ClariQ/valid_ClariQ.pkl
+
+python -u Evaluation.py \
+--prediction_path ./output/ClariQ.SIP.DistanceCRF-TransferLearning \
+--label_path ./dataset/ClariQ/test_ClariQ.pkl
+```
+The files recording the evaluation results would be saved in the path `./output/ClariQ.SIP.DistanceCRF-TransferLearning/`.
 
 ## Run action prediction
 

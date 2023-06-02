@@ -123,11 +123,20 @@ if __name__ == '__main__':
     else:
         raise NotImplementedError
 
+    if "train" in args.input_path:
+        args.dataset_type="train"
+    elif "valid" in args.input_path:
+        args.dataset_type= "valid"
+    elif "test" in args.input_path:
+        args.dataset_type = "test"
+    else:
+        raise NotImplementedError
+
     config = Config(args)
     mlb = MultiLabelBinarizer(classes=config.action)
 
     for epoch_id in range(0,args.epoch_num+1):
-        prediction_path_ = args.prediction_path + "/" + str(epoch_id) + '.txt'
+        prediction_path_ = args.prediction_path + "/" + args.dataset_type+"."+ str(epoch_id) + '.txt'
 
         if os.path.exists(prediction_path_):
             print(f"Start to evaluate {epoch_id}")
@@ -136,5 +145,5 @@ if __name__ == '__main__':
             else:
                 result_dict = evaluation_SIP(prediction_path_, args.label_path)
 
-            with open(args.prediction_path+"/"+"result.txt", 'a+', encoding='utf-8') as w:
+            with open(args.prediction_path+"/"+"result.+"+args.dataset_type+"+.txt", 'a+', encoding='utf-8') as w:
                 w.write(str(epoch_id) + ": " + str(result_dict) + os.linesep)
