@@ -75,7 +75,7 @@ python -u ./dataset/preprocess_ClariQ.py \
 ## Run SIP
 ### LLaMA
 We provide the script for running LLaMA; see [here](./model/LLaMA.py).
-Before running the script, please first download the LLaMA original checkpoints and convert them to the Hugging Face Transformers format; See [here](https://huggingface.co/docs/transformers/main/model_doc/llama)
+Before running the script, please first download the LLaMA original checkpoints and convert them to the Hugging Face Transformers format; see [here](https://huggingface.co/docs/transformers/main/model_doc/llama).
 Because LLaMA performs extremely badly on Chinese text, we use the Chinese versions of LLaMA from [here](https://github.com/ymcui/Chinese-LLaMA-Alpaca/blob/main/README_EN.md). 
 Please follow the link to produce Chinese LLaMA checkpoints.
 Note that only LLaMA-7B and 13B are available for Chinese LLaMA at the time of writing.
@@ -84,7 +84,7 @@ Note that only LLaMA-7B and 13B are available for Chinese LLaMA at the time of w
 Run the following commands to run LLaMA on WISE:
 ```bash
 python -u ./model/LLaMA.py \
---model LLaMA-zh-7B-plus \ # LLaMA-zh-13B-plus
+--model LLaMA-zh-7B-plus \
 --pretained {your local path to the checkpoint of Chinese LLaMA-7B-plus} \
 --demonstration_path ./dataset/WISE/train_WISE.pkl \
 --input_path ./dataset/WISE/test_WISE.pkl \
@@ -103,13 +103,14 @@ python -u ./model/LLaMA.py \
 --batch_size 2 \
 --demonstration_num 2
 ```
-The output files would be saved in the path `.\output\WISE.SIP.LLaMA-zh-7B-plus` and `.\output\WISE.SIP.LLaMA-zh-13B-plus`.
+The output files would be saved in the paths `.\output\WISE.SIP.LLaMA-zh-7B-plus` and `.\output\WISE.SIP.LLaMA-zh-13B-plus`.
 
 #### MSDialog
+Run the following commands to run LLaMA on MSDialog:
 ```bash
 python -u ./model/LLaMA.py \
 --model LLaMA-7B \
---pretained /ivi/ilps/personal/cmeng/llama/7B \
+--pretained {your local path to the checkpoint of LLaMA-7B} \
 --demonstration_path ./dataset/MSDialog/train_MSDialog.pkl \
 --input_path ./dataset/MSDialog/test_MSDialog.pkl \
 --output_path ./output/ \
@@ -119,7 +120,7 @@ python -u ./model/LLaMA.py \
 
 python -u ./model/LLaMA.py \
 --model LLaMA-13B \
---pretained /ivi/ilps/personal/cmeng/llama/13B \
+--pretained {your local path to the checkpoint of LLaMA-13B} \
 --demonstration_path ./dataset/MSDialog/train_MSDialog.pkl \
 --input_path ./dataset/MSDialog/test_MSDialog.pkl \
 --output_path ./output/ \
@@ -129,7 +130,7 @@ python -u ./model/LLaMA.py \
 
 python -u ./model/LLaMA.py \
 --model LLaMA-30B \
---pretained /ivi/ilps/personal/cmeng/llama/30B \
+--pretained {your local path to the checkpoint of LLaMA-30B} \
 --demonstration_path ./dataset/MSDialog/train_MSDialog.pkl \
 --input_path ./dataset/MSDialog/test_MSDialog.pkl \
 --output_path ./output/ \
@@ -139,7 +140,7 @@ python -u ./model/LLaMA.py \
 
 python -u ./model/LLaMA.py \
 --model LLaMA-65B \
---pretained /ivi/ilps/personal/cmeng/llama/65B \
+--pretained {your local path to the checkpoint of LLaMA-65B} \
 --demonstration_path ./dataset/MSDialog/train_MSDialog.pkl \
 --input_path ./dataset/MSDialog/test_MSDialog.pkl \
 --output_path ./output/ \
@@ -147,9 +148,11 @@ python -u ./model/LLaMA.py \
 --batch_size 1 \
 --demonstration_num 2
 ```
+The output files would be saved in the paths `.\output\MSDialog.SIP.LLaMA-7B`, `MSDialog.SIP.LLaMA-13B`, `MSDialog.SIP.LLaMA-30B` and `MSDialog.SIP.LLaMA-65B`.
 
 ### MuSIc
 #### WISE
+Train MuSIc on the training set of WISE and conduct inference on the validation and test sets of WISE:
 ```bash
 python -u ./model/Run.py \
 --task SIP \
@@ -175,8 +178,10 @@ python -u ./model/Run.py \
 --log_path ./log/ \
 --mode inference
 ```
+The above commands would produce model checkpoints and inference output files, which are stored in the path `./output/WISE.SIP.DistanceCRF/checkpoints` and `./output/WISE.SIP.DistanceCRF/`, respectively.
 
 #### MSDialog
+Train MuSIc on the training set of MSDialog and conduct inference on the validation and test sets of MSDialog:
 ```bash
 python -u ./model/Run.py \
 --task SIP \
@@ -202,8 +207,10 @@ python -u ./model/Run.py \
 --log_path ./log/ \
 --mode inference
 ```
+The above commands would produce model checkpoints and inference output files, which are stored in the path `./output/MSDialog.SIP.DistanceCRF/checkpoints` and `./output/MSDialog.SIP.DistanceCRF/`, respectively.
 
 ## Run clarification need prediction
+Run the following command to train MuSIc on the training set of ClariQ:
 ```bash
 python -u ./model/Run.py \
 --task SIP \
@@ -212,9 +219,13 @@ python -u ./model/Run.py \
 --output_path ./output/ \
 --log_path ./log/ \
 --mode train \
-# --initialization_path ./output/MSDialog.SIP.DistanceCRF/checkpoints/1.pkl
+# --initialization_path {your local path to the checkpoint trained on SIP on MSDialog}
 ```
+The above commands would produce model checkpoints in the path `./output/ClariQ.SIP.DistanceCRF/checkpoints/`.
+If you would like to fine-tune the checkpoint that is pre-trained on the SIP task on ClariQ, please specify `--initialization_path`. 
+In this case, the checkpoints would be saved in the path `./output/ClariQ.SIP.DistanceCRF-TransferLearning/checkpoints/`.
 
+Run the following command to infer MuSIc without pertaining on MSDialog on the validation and test sets of ClariQ:
 ```bash
 python -u ./model/Run.py \
 --task SIP \
@@ -222,7 +233,8 @@ python -u ./model/Run.py \
 --input_path ./dataset/ClariQ/valid_ClariQ.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---mode inference
+--mode inference \
+# --initialization_path {your local path to the checkpoint trained on SIP on MSDialog}
 
 python -u ./model/Run.py \
 --task SIP \
@@ -230,8 +242,12 @@ python -u ./model/Run.py \
 --input_path ./dataset/ClariQ/test_ClariQ.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---mode inference
+--mode inference \
+# --initialization_path {your local path to the checkpoint trained on SIP on MSDialog}
 ```
+The above commands would produce inference output files in the path `./output/ClariQ.SIP.DistanceCRF/`.
+If you would like to infer MuSIc with pertaining on MSDialog on the validation and test sets of ClariQ, please still specify `--initialization_path` that is used during training.
+
 
 ## Evaluate SIP and clarification need prediction
 ```bash

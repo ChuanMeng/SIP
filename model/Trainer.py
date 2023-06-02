@@ -124,7 +124,7 @@ class Trainer(object):
                     else:
                         raise NotImplementedError
 
-            with open(os.path.join(self.args.output_path, str(epoch_id)+".txt"), 'w') as w:
+            with open(os.path.join(self.args.output_path, self.args.dataset_type+"."+str(epoch_id)+".txt"), 'w') as w:
                 for index, example_id in enumerate(accumulative_example_id):
                     if self.args.task == "SIP":
                         w.write(example_id + '\t' + str(accumulative_prediction[index])  + '\n')

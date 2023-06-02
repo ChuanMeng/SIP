@@ -121,10 +121,19 @@ if __name__ == '__main__':
     else:
         raise NotImplementedError
 
+    if "train" in args.input_path:
+        args.dataset_type="train"
+    elif "valid" in args.input_path:
+        args.dataset_type= "valid"
+    elif "test" in args.input_path:
+        args.dataset_type = "test"
+    else:
+        raise NotImplementedError
+
     args.name = f"{args.dataset}.{args.task}.{args.model}"
 
     if args.initialization_path is not None:
-        args.name = f"{args.dataset}.{args.task}.{args.model}-TL"
+        args.name = f"{args.dataset}.{args.task}.{args.model}-TransferLearning"
     else:
         args.name = f"{args.dataset}.{args.task}.{args.model}"
 
