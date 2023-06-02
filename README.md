@@ -8,7 +8,7 @@ In order to replicate the results in the paper, kindly adhere to the subsequent 
   - [LLaMA](#LLaMA) 
   - [MuSIc](#MuSIc) 
 - [Run clarification need prediction](#Run-clarification-need-prediction) 
-- [Evaluate SIP and Clarification need prediction](#Evaluate-SIP-and-clarification-need-prediction) 
+- [Evaluate SIP and clarification need prediction](#Evaluate-SIP-and-clarification-need-prediction) 
 - [Run action prediction](#Run-action-prediction) 
   - [Multi-label classification](#Multi-label-classification) 
   - [SIP+Multi-label classification](#Multi-label-classification) 
@@ -24,7 +24,6 @@ Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-
 ## Data Preprocessing
 The following commands are used to conduct data preprocessing, which includes the automatic annotation of initiative-taking decision labels. 
 We derive the initiative annotations by mapping the manual annotations of actions to initiative or non-initiative labels.
@@ -74,14 +73,19 @@ python -u ./dataset/preprocess_ClariQ.py \
 --output_path ./dataset/ClariQ/test_ClariQ.pkl
 ```
 ## Run SIP
-
 ### LLaMA
+We provide the script for running LLaMA; see [here](./model/LLaMA.py).
+Before running the script, please first download the LLaMA original checkpoints and convert them to the Hugging Face Transformers format; See [here](https://huggingface.co/docs/transformers/main/model_doc/llama)
+Because LLaMA performs extremely badly on Chinese text, we use the Chinese versions of LLaMA from [here](https://github.com/ymcui/Chinese-LLaMA-Alpaca/blob/main/README_EN.md). 
+Please follow the link to produce Chinese LLaMA checkpoints.
+Note that only LLaMA-7B and 13B are available for Chinese LLaMA at the time of writing.
 
 #### WISE
+Run the following commands to run LLaMA on WISE:
 ```bash
 python -u ./model/LLaMA.py \
---model LLaMA-zh-7B-plus \
---pretained /ivi/ilps/personal/cmeng/llama-zh/7B-plus \
+--model LLaMA-zh-7B-plus \ # LLaMA-zh-13B-plus
+--pretained {your local path to the checkpoint of Chinese LLaMA-7B-plus} \
 --demonstration_path ./dataset/WISE/train_WISE.pkl \
 --input_path ./dataset/WISE/test_WISE.pkl \
 --output_path ./output/ \
@@ -90,8 +94,8 @@ python -u ./model/LLaMA.py \
 --demonstration_num 2
 
 python -u ./model/LLaMA.py \
---model LLaMA-zh-13B-plus \
---pretained /ivi/ilps/personal/cmeng/llama-zh/13B-plus \
+--model LLaMA-zh-13B-plus
+--pretained {your local path to the checkpoint of Chinese LLaMA-13B-plus} \
 --demonstration_path ./dataset/WISE/train_WISE.pkl \
 --input_path ./dataset/WISE/test_WISE.pkl \
 --output_path ./output/ \
@@ -99,6 +103,7 @@ python -u ./model/LLaMA.py \
 --batch_size 2 \
 --demonstration_num 2
 ```
+The output files would be saved in the path `.\output\WISE.SIP.LLaMA-zh-7B-plus` and `.\output\WISE.SIP.LLaMA-zh-13B-plus`.
 
 #### MSDialog
 ```bash
@@ -228,7 +233,35 @@ python -u ./model/Run.py \
 --mode inference
 ```
 
-## Evaluate SIP and Clarification need prediction
+## Evaluate SIP and clarification need prediction
+```bash
+python -u Evaluation.py \
+--prediction_path ./output/WISE.SIP.LLaMA-zh-7B-plus \
+--label_path ./dataset/WISE/test_WISE.pkl
+
+python -u Evaluation.py \
+--prediction_path ./output/WISE.SIP.LLaMA-zh-13B-plus \
+--label_path ./dataset/WISE/test_WISE.pkl
+```
+
+```bash
+python -u Evaluation.py \
+--prediction_path ./output/MSDialog.SIP.yesno-LLaMA-7B \
+--label_path ./dataset/MSDialog/test_MSDialog.pkl
+
+python -u Evaluation.py \
+--prediction_path ./output/MSDialog.SIP.yesno-LLaMA-13B \
+--label_path ./dataset/MSDialog/test_MSDialog.pkl
+
+python -u Evaluation.py \
+--prediction_path ./output/MSDialog.SIP.yesno-LLaMA-30B \
+--label_path ./dataset/MSDialog/test_MSDialog.pkl
+
+python -u Evaluation.py \
+--prediction_path ./output/MSDialog.SIP.yesno-LLaMA-65B \
+--label_path ./dataset/MSDialog/test_MSDialog.pkl
+```
+
 ```bash
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP.DistanceCRF \

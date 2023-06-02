@@ -14,11 +14,10 @@ import os
 
 def text_parser(args, text):
 
-    if "llama-zh" in args.pretained:
+    if args.dataset == "WISE":
         output= text.split("系统是否应该在当前轮采取主动？")[-1].strip().replace('\n', '')
     else:
         output = text.split("Should the system take the initiative at the current turn?")[-1].strip().replace('\n', '')
-
 
     if output.startswith('yes') or output.startswith('是'):
         output='Initiative'
@@ -36,7 +35,7 @@ class Prompter:
     # following https://github.com/kyriemao/LLMCS/blob/master/promptor.py
     def __init__(self, args):
         self.args=args
-        if "llama-zh" in self.args.pretained:
+        if self.args.dataset == "WISE":
             self.instruction = "在一个多轮对话的场景下，给定当前轮的用户输入和之前轮的用户与系统的对话历史，预测系统在当前轮是否应该采取主动。请输出“是”或“否”。“是”意味着系统应该在当前轮采取主动，例如通过向用户询问澄清问题或者请求反馈；“否”意味着系统不应该在当前轮采取主动，例如通过向用户返回答案。"
         else:
             self.instruction = "Given the user utterance at current turn and the conversational history at previous turns, predict whether the system should take the initiative or not at the current turn. Please output \"yes\" or \"no\". \"yes\" means the system should take the initiative at the current turn by asking a clarifying question or requesting feedback and so on; \"no\" means the system should not take the initiative at the current turn, e.g., giving an answer to the user."
@@ -56,7 +55,7 @@ class Prompter:
 
     def build_turn_prompt(self, turn_idx, turn, is_demo):
         turn_prompt = []
-        if "llama-zh" in self.args.pretained:
+        if self.args.dataset == "WISE":
             turn_prompt.append("第{}轮".format(turn_idx + 1))
             turn_prompt.append("用户输入：{}".format(turn["user_utterance"]))
         else:
@@ -64,14 +63,14 @@ class Prompter:
             turn_prompt.append("User utterance: {}".format(turn["user_utterance"]))
 
         if is_demo:
-            if "llama-zh" in self.args.pretained:
+            if self.args.dataset == "WISE":
                 turn_prompt.append("系统是否应该在当前轮采取主动？{}".format("是" if turn["system_I_label"] == "Initiative" else "否"))
                 turn_prompt.append("系统回复：{}".format(turn["system_utterance"]))
             else:
                 turn_prompt.append("Should the system take the initiative at the current turn? {}".format("yes" if turn["system_I_label"] == "Initiative" else "no"))
                 turn_prompt.append("System utterance: {}".format(turn["system_utterance"]))
         else:  # for test
-            if "llama-zh" in self.args.pretained:
+            if self.args.dataset == "WISE":
                 turn_prompt.append("系统是否应该在当前轮采取主动？")
             else:
                 turn_prompt.append("Should the system take the initiative at the current turn?")
@@ -85,7 +84,7 @@ class Prompter:
             last_conversation_prompt = pre_prompt_components[-1]
             pre_prompt_components.pop()
             last_conversation_prompt_turns = last_conversation_prompt.split('\n') # find the incomplete last turn
-            if "llama-zh" in self.args.pretained:
+            if self.args.dataset == "WISE":
                 last_conversation_prompt_turns[-1] = "系统是否应该在当前轮采取主动？{}".format("是" if last_SIP=="Initiative" else "否")  # replace the empty "System initiative-taking decision" with the one with value
                 last_conversation_prompt_turns.append("系统回复：{}".format(last_sys_utterance))
             else:
@@ -119,7 +118,7 @@ class LLM:
 
         self.args.invalid_num=0
 
-        if "llama-zh" in self.args.pretained:
+        if self.args.dataset == "WISE":
             save_token_id = self.tokenizer("是 \n 否", return_tensors='pt', padding='longest', truncation=True)['input_ids'][0]
         else:
             save_token_id = self.tokenizer("yes \n no", return_tensors='pt', padding='longest', truncation=True)['input_ids'][0]
