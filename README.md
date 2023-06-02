@@ -302,7 +302,7 @@ python -u Evaluation.py \
 --prediction_path ./output/MSDialog.SIP.LLaMA-65B \
 --label_path ./dataset/MSDialog/test_MSDialog.pkl
 ```
-The files recording the evaluation results would be saved in the paths `./output/WISE.SIP.LLaMA-zh-7B-plus/`, `./output/WISE.SIP.LLaMA-zh-13B-plus/`, `./output/WISE.SIP.LLaMA-zh-30B-plus/` and `./output/WISE.SIP.LLaMA-zh-65B-plus/`.
+The files recording the evaluation results would be saved in the paths `./output/MSDialog.SIP.LLaMA-7B/`, `./output/MSDialog.SIP.LLaMA-13B/`, `./output/MSDialog.SIP.LLaMA-30B/` and `./output/MSDialog.SIP.LLaMA-65B/`.
 
 Evaluate MuSIc on the validation and test sets of WISE:
 ```bash
