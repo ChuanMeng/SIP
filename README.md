@@ -14,7 +14,7 @@ In order to replicate the results in the paper, kindly adhere to the subsequent 
   - [SIP+Multi-label classification](#Multi-label-classification) 
   - [Sequence generation](#Sequence-generation)
   - [SIP+Sequence generation](#Sequence-generation)
--[Evaluate action prediction](#Evaluate-Action-prediction)
+- [Evaluate action prediction](#Evaluate-Action-prediction)
 
 Note that due to the nature of the anonymous GitHub repository, we apologize that the outline hyperlinks do not work. 
 These issues will be fixed in the normal GitHub repository.
@@ -272,7 +272,6 @@ The above commands would produce checkpoints, which would be saved in the paths 
 
 
 ## Evaluate SIP and clarification need prediction
-
 Evaluate LLaMA on the test set of WISE:
 ```bash
 python -u Evaluation.py \
@@ -309,11 +308,11 @@ Evaluate MuSIc on the validation and test sets of WISE:
 ```bash
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP.DistanceCRF \
---label_path ./dataset/WISE/test_WISE.pkl
+--label_path ./dataset/WISE/valid_WISE.pkl
 
 python -u Evaluation.py \
 --prediction_path ./output/WISE.SIP.DistanceCRF \
---label_path ./dataset/WISE/valid_WISE.pkl
+--label_path ./dataset/WISE/test_WISE.pkl
 ```
 The files recording the evaluation results would be saved in the path `./output/WISE.SIP.DistanceCRF/`.
 
@@ -358,6 +357,7 @@ The files recording the evaluation results would be saved in the path `./output/
 ### Multi-label classification
 
 #### WISE
+Train the action prediction model based on multi-label classification on the training set of WISE and conduct inference on the validation and test sets of WISE:
 ```bash
 python -u ./model/Run.py \
 --task AP \
@@ -383,8 +383,10 @@ python -u ./model/Run.py \
 --log_path ./log/ \
 --mode inference
 ```
+The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/WISE.AP.mlc/checkpoints/` and `./output/WISE.AP.mlc/`, respectively.
 
 #### MSDialog
+Train the action prediction model based on multi-label classification on the training set of MSDialog and conduct inference on the validation and test sets of MSDialog:
 ```bash
 python -u ./model/Run.py \
 --task AP \
@@ -410,10 +412,12 @@ python -u ./model/Run.py \
 --log_path ./log/ \
 --mode inference
 ```
+The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/MSDialog.AP.mlc/checkpoints/` and `./output/MSDialog.AP.mlc/`, respectively.
 
 ### SIP+multi-label classification
 
 #### WISE
+Train the SIP-aware action prediction model based on multi-label classification on the training set of WISE and conduct inference on the validation and test sets of WISE:
 ```bash
 python -u ./model/Run.py \
 --task SIP-AP \
@@ -429,7 +433,7 @@ python -u ./model/Run.py \
 --input_path ./dataset/WISE/valid_WISE.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path ./output/WISE.SIP.DistanceCRF/3.txt \
+--SIP_path {Your local path to MuSIc's inference output file on SIP} \
 --mode inference
 
 python -u ./model/Run.py \
@@ -438,11 +442,15 @@ python -u ./model/Run.py \
 --input_path ./dataset/WISE/test_WISE.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path ./output/WISE.SIP.DistanceCRF/3.txt \
+--SIP_path {Your local path to MuSIc's inference output file on SIP} \
 --mode inference
 ```
+Note that before conducting inference, please specify `--SIP_path`, which shows the path to the SIP inference output file.
+E.g., for conducting inference on the test set of WISE, please specify MuSIc's inference output file on the test set of WISE on the SIP task.
+The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/WISE.SIP-AP.mlc/checkpoints/` and `./output/WISE.SIP-AP.mlc/`, respectively.
 
 #### MSDialog
+Train the SIP-aware action prediction model based on multi-label classification on the training set of MSDialog and conduct inference on the validation and test sets of MSDialog:
 ```bash
 python -u ./model/Run.py \
 --task SIP-AP \
@@ -458,7 +466,7 @@ python -u ./model/Run.py \
 --input_path ./dataset/MSDialog/valid_MSDialog.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path ./output/MSDialog.SIP.DistanceCRF/1.txt \
+--SIP_path {Your local path to MuSIc's inference output file on SIP} \
 --mode inference
 
 python -u ./model/Run.py \
@@ -467,12 +475,16 @@ python -u ./model/Run.py \
 --input_path ./dataset/MSDialog/test_MSDialog.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path ./output/MSDialog.SIP.DistanceCRF/1.txt \
+--SIP_path {Your local path to MuSIc's inference output file on SIP} \
 --mode inference
 ```
+Note that before conducting inference, please specify `--SIP_path`, which shows the path to the SIP inference output file.
+E.g., for conducting inference on the test set of MSDialog, please specify MuSIc's inference output file on the test set of MSDialog on the SIP task.
+The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/MSDialog.SIP-AP.mlc/checkpoints/` and `./output/MSDialog.SIP-AP.mlc/`, respectively.
 
 ### Sequence generation
 #### WISE
+Train the action prediction model based on sequence generation on the training set of WISE and conduct inference on the validation and test sets of WISE:
 ```bash
 python -u ./model/Run.py \
 --task AP \
@@ -498,8 +510,10 @@ python -u ./model/Run.py \
 --log_path ./log/ \
 --mode inference
 ```
+The above commands would produce model checkpoints and inference output files stored in the paths `./output/WISE.AP.sg/checkpoints/` and `./output/WISE.AP.sg/`, respectively.
 
 #### MSDialog
+Train the action prediction model based on sequence generation on the training set of MSDialog and conduct inference on the validation and test sets of MSDialog:
 ```bash
 python -u ./model/Run.py \
 --task AP \
@@ -525,9 +539,11 @@ python -u ./model/Run.py \
 --log_path ./log/ \
 --mode inference
 ```
+The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/MSDialog.AP.sg/checkpoints/` and `./output/MSDialog.AP.sg/`, respectively.
 
 ### SIP+sequence generation
 #### WISE
+Train the SIP-aware action prediction model based on sequence generation on the training set of WISE and conduct inference on the validation and test sets of WISE:
 ```bash
 python -u ./model/Run.py \
 --task SIP-AP \
@@ -543,7 +559,7 @@ python -u ./model/Run.py \
 --input_path ./dataset/WISE/valid_WISE.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path ./output/WISE.SIP.DistanceCRF/3.txt \
+--SIP_path {Your local path to MuSIc's inference output file on SIP} \
 --mode inference
 
 python -u ./model/Run.py \
@@ -552,11 +568,13 @@ python -u ./model/Run.py \
 --input_path ./dataset/WISE/test_WISE.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path ./output/WISE.SIP.DistanceCRF/3.txt \
+--SIP_path {Your local path to MuSIc's inference output file on SIP} \
 --mode inference
 ```
+The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/WISE.SIP-AP.sg/checkpoints/` and `./output/WISE.SIP-AP.sg/`, respectively.
 
 #### MSDialog
+Train the SIP-aware action prediction model based on sequence generation on the training set of MSDialog and conduct inference on the validation and test sets of MSDialog:
 ```bash
 python -u ./model/Run.py \
 --task SIP-AP \
@@ -572,7 +590,7 @@ python -u ./model/Run.py \
 --input_path ./dataset/MSDialog/valid_MSDialog \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path ./output/MSDialog.SIP.DistanceCRF/1.txt \
+--SIP_path {Your local path to MuSIc's inference output file on SIP} \
 --mode inference
 
 python -u ./model/Run.py \
@@ -581,9 +599,11 @@ python -u ./model/Run.py \
 --input_path ./dataset/MSDialog/test_MSDialog.pkl \
 --output_path ./output/ \
 --log_path ./log/ \
---SIP_path ./output/MSDialog.SIP.DistanceCRF/1.txt \
+--SIP_path {Your local path to MuSIc's inference output file on SIP} \
 --mode inference
 ```
+The above commands would produce model checkpoints and inference output files, which are stored in the paths `./output/MSDialog.SIP-AP.sg/checkpoints/` and `./output/MSDialog.SIP-AP.sg/`, respectively.
+
 
 ## Evaluate action prediction
 ```bash
