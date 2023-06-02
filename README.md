@@ -16,8 +16,8 @@ In order to replicate the results in the paper, kindly adhere to the subsequent 
   - [SIP+Sequence generation](#Sequence-generation)
 -[Evaluate action prediction](#Evaluate-Action-prediction)
 
-Note that due to the nature of the anonymous repository, we apologize that the outline hyperlinks do not work. 
-However, these issues will be fixed in the final repository.
+Note that due to the nature of the anonymous GitHub repository, we apologize that the outline hyperlinks do not work. 
+These issues will be fixed in the normal GitHub repository.
 
 ## Prerequisites
 Install dependencies:  
