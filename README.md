@@ -75,11 +75,15 @@ python -u ./dataset/preprocess_ClariQ.py \
 ## Run SIP
 ### LLaMA
 We provide the script for running LLaMA; see [here](./model/LLaMA.py).
+
 Before running the script, please make sure your Cuda version is greater than or equal to 11.1. 
-Next, download the LLaMA original checkpoints and convert them to the Hugging Face Transformers format; see [here](https://huggingface.co/docs/transformers/main/model_doc/llama) for details.
-Because the original LLaMA performs extremely badly on Chinese text, we use the Chinese versions of LLaMA from [here](https://github.com/ymcui/Chinese-LLaMA-Alpaca/blob/main/README_EN.md). 
-Please follow the link to produce Chinese LLaMA checkpoints.
-Note that only LLaMA-7B and 13B are available for Chinese LLaMA at the time of writing.
+Next, download the LLaMA original checkpoints and convert them to the Hugging Face Transformers format; see [here](https://huggingface.co/docs/transformers/main/model_doc/llama) for more details.
+
+Because the original LLaMA performs extremely badly on WISE, that is in Chinese text, we use the Chinese versions of LLaMA from [here](https://github.com/ymcui/Chinese-LLaMA-Alpaca/blob/main/README_EN.md). 
+Please follow the instruction in the link to produce Chinese LLaMA checkpoints.
+At the time of writing, the Chinese versions of LLaMA only have **Chinese-LLaMA-7B**, **Chinese-LLaMA-13B**, **Chinese-LLaMA-Plus-7B** and **Chinese-LLaMA-Plus-13B**.
+In particular, we choose to use the plus versions, namely **Chinese-LLaMA-Plus-7B** and **Chinese-LLaMA-Plus-13B**, because the plus versions were trained on more data and are highly recommended for use by the releaser.
+
 Our preliminary experiments showed that all LLaMA variants on the two datasets perform best when injected with **2 complete conversations** randomly sampled from the training set.
 
 #### WISE
