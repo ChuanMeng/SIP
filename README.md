@@ -80,6 +80,7 @@ Next, download the LLaMA original checkpoints and convert them to the Hugging Fa
 Because the original LLaMA performs extremely badly on Chinese text, we use the Chinese versions of LLaMA from [here](https://github.com/ymcui/Chinese-LLaMA-Alpaca/blob/main/README_EN.md). 
 Please follow the link to produce Chinese LLaMA checkpoints.
 Note that only LLaMA-7B and 13B are available for Chinese LLaMA at the time of writing.
+Our preliminary experiments showed that all LLaMA variants on the two datasets perform best when injected with **2 complete conversations** randomly sampled from the training set.
 
 #### WISE
 Run the following commands to run LLaMA on WISE:
