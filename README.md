@@ -1,6 +1,6 @@
 # System Initiative Prediction (SIP)
 
-This is the virtual appendix for the paper **System Initiative Prediction for Multi-turn Conversational Information Seeking**.
+This is the code repository for the paper titled **System Initiative Prediction for Multi-turn Conversational Information Seeking**.
 To reproduce the reported results in the paper, please follow the instructions outlined below:
 - [Prerequisites](#Prerequisites)
 - [Data Preprocessing](#Data-Preprocessing)
@@ -18,6 +18,9 @@ To reproduce the reported results in the paper, please follow the instructions o
 
 Note that due to the nature of the anonymous GitHub repository, we apologize that the outline hyperlinks do not work. 
 These issues will be fixed in the normal GitHub repository.
+
+Please be aware that, as the GitHub repository is anonymous, the hyperlinks in the outline are not functional. 
+This issue will be rectified in the regular GitHub repository.
 
 ## Prerequisites
 Install dependencies:  
