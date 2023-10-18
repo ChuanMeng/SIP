@@ -1,7 +1,7 @@
-# System Initiative Prediction (SIP)
-![](https://api.visitorbadge.io/api/VisitorHit?user=ChuanMeng&repo=QPP4CS&countColor=%237B1E7A)
+# System Initiative Prediction for Multi-turn Conversational Information Seeking
+![](https://api.visitorbadge.io/api/VisitorHit?user=ChuanMeng&repo=SIP&countColor=%237B1E7A)
 
-This is the code repository for the paper titled **System Initiative Prediction for Multi-turn Conversational Information Seeking**.
+This is the code repository for the paper titled **[System Initiative Prediction for Multi-turn Conversational Information Seeking](https://staff.fnwi.uva.nl/m.derijke/wp-content/papercite-data/pdf/meng-2023-system.pdf)**.
 
 We kindly ask you to cite our papers if you find this repository useful: 
 ```
