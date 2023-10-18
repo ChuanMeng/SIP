@@ -1,6 +1,18 @@
 # System Initiative Prediction (SIP)
+![](https://api.visitorbadge.io/api/VisitorHit?user=ChuanMeng&repo=QPP4CS&countColor=%237B1E7A)
 
 This is the code repository for the paper titled **System Initiative Prediction for Multi-turn Conversational Information Seeking**.
+
+We kindly ask you to cite our papers if you find this repository useful: 
+```
+@inproceedings{meng2023system,
+ author = {Meng, Chuan and Aliannejadi, Mohammad and de Rijke, Maarten},
+ title = {System Initiative Prediction for Multi-turn Conversational Information Seeking},
+ booktitle = {Proceedings of the 32nd ACM International Conference on Information and Knowledge Management},
+ year = {2023},
+}
+```
+
 To reproduce the reported results in the paper, please follow the instructions outlined below:
 - [Prerequisites](#Prerequisites)
 - [Data Preprocessing](#Data-Preprocessing)
