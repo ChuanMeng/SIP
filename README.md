@@ -1,7 +1,7 @@
 # System Initiative Prediction (SIP)
 ![](https://api.visitorbadge.io/api/VisitorHit?user=ChuanMeng&repo=SIP&countColor=%237B1E7A)
 
-This is the code repository for the paper titled [System Initiative Prediction for Multi-turn Conversational Information Seeking](https://staff.fnwi.uva.nl/m.derijke/wp-content/papercite-data/pdf/meng-2023-system.pdf), which got accepted at The 32nd ACM International Conference on Information and Knowledge Management (CIKM 2023) as a long paper.  
+This is the code repository for the paper titled [System Initiative Prediction for Multi-turn Conversational Information Seeking](https://dl.acm.org/doi/10.1145/3583780.3615070), which got accepted at The 32nd ACM International Conference on Information and Knowledge Management (CIKM 2023) as a long paper.  
 
 We kindly ask you to cite our papers if you find this repository useful: 
 ```
