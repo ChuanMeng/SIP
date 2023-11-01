@@ -6,10 +6,11 @@ This is the code repository for the paper titled [System Initiative Prediction f
 We kindly ask you to cite our papers if you find this repository useful: 
 ```
 @inproceedings{meng2023system,
- author = {Meng, Chuan and Aliannejadi, Mohammad and de Rijke, Maarten},
- title = {System Initiative Prediction for Multi-turn Conversational Information Seeking},
- booktitle = {Proceedings of the 32nd ACM International Conference on Information and Knowledge Management},
- year = {2023},
+  title={System Initiative Prediction for Multi-turn Conversational Information Seeking},
+  author={Meng, Chuan and Aliannejadi, Mohammad and de Rijke, Maarten},
+  booktitle={Proceedings of the 32nd ACM International Conference on Information and Knowledge Management},
+  pages={1807--1817},
+  year={2023}
 }
 ```
 
