@@ -29,9 +29,6 @@ To reproduce the reported results in the paper, please follow the instructions o
   - [SIP+Sequence generation](#Sequence-generation)
 - [Evaluate action prediction](#Evaluate-Action-prediction)
 
-Please be aware that, as the GitHub repository is anonymous, the hyperlinks in the outline are not functional. 
-This issue will be rectified in the regular GitHub repository.
-
 ## Prerequisites
 Install dependencies:  
 ```bash
